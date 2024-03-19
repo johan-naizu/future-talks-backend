@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "student",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::university.university"
+    },
+    "pfp": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "remarks": {
+      "type": "text"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}

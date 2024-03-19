@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "universities",
+  "info": {
+    "singularName": "university",
+    "pluralName": "universities",
+    "displayName": "university",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "remarks": {
+      "type": "text"
+    }
+  }
+}

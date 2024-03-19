@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "course",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "graduationType": {
+      "type": "enumeration",
+      "enum": [
+        "Diploma",
+        "Polytechnic",
+        "UG",
+        "PG",
+        "Certified Programs",
+        "M.Phil",
+        "PHD"
+      ]
+    },
+    "specialisation": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
