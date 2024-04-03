@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_qualification_educational_qualifications",
+  "info": {
+    "displayName": "Educational Qualification",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "course": {
+      "type": "string"
+    },
+    "university": {
+      "type": "string"
+    },
+    "marks": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    }
+  }
+}

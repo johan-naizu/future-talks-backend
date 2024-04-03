@@ -788,6 +788,47 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiApplicationApplication extends Schema.CollectionType {
+  collectionName: 'applications';
+  info: {
+    singularName: 'application';
+    pluralName: 'applications';
+    displayName: 'application';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    course: Attribute.Relation<
+      'api::application.application',
+      'oneToOne',
+      'api::course.course'
+    >;
+    name: Attribute.String;
+    email: Attribute.Email;
+    dob: Attribute.Date;
+    gender: Attribute.Enumeration<['Male', 'Female', 'Other']>;
+    phoneNumber: Attribute.String;
+    address: Attribute.Component<'address.address'>;
+    qualification: Attribute.Component<'qualification.educational-qualification'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::application.application',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::application.application',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCourseCourse extends Schema.CollectionType {
   collectionName: 'courses';
   info: {
@@ -812,8 +853,21 @@ export interface ApiCourseCourse extends Schema.CollectionType {
         'PHD'
       ]
     >;
-    specialisation: Attribute.String;
     description: Attribute.Text;
+    students: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::student.student'
+    >;
+    professionals: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::professional.professional'
+    >;
+    courseType: Attribute.Enumeration<
+      ['BTech', 'Bsc', 'BA', 'MTech', 'MS', 'MBA', 'BPT', 'MPT']
+    >;
+    logo: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -825,6 +879,79 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMessageMessage extends Schema.CollectionType {
+  collectionName: 'messages';
+  info: {
+    singularName: 'message';
+    pluralName: 'messages';
+    displayName: 'Message';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.Email;
+    message: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProfessionalProfessional extends Schema.CollectionType {
+  collectionName: 'professionals';
+  info: {
+    singularName: 'professional';
+    pluralName: 'professionals';
+    displayName: 'professional';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    courses: Attribute.Relation<
+      'api::professional.professional',
+      'manyToMany',
+      'api::course.course'
+    >;
+    job: Attribute.String;
+    pfp: Attribute.Media;
+    remarks: Attribute.Text;
+    phoneNumber: Attribute.String;
+    email: Attribute.Email;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::professional.professional',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::professional.professional',
       'oneToOne',
       'admin::user'
     > &
@@ -845,14 +972,14 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    course: Attribute.Relation<
+    courses: Attribute.Relation<
       'api::student.student',
-      'oneToOne',
+      'manyToMany',
       'api::course.course'
     >;
-    university: Attribute.Relation<
+    universities: Attribute.Relation<
       'api::student.student',
-      'oneToOne',
+      'manyToMany',
       'api::university.university'
     >;
     pfp: Attribute.Media;
@@ -877,6 +1004,40 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   };
 }
 
+export interface ApiTrendingCourseTrendingCourse extends Schema.SingleType {
+  collectionName: 'trending_courses';
+  info: {
+    singularName: 'trending-course';
+    pluralName: 'trending-courses';
+    displayName: 'Trending Course';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    courses: Attribute.Relation<
+      'api::trending-course.trending-course',
+      'oneToMany',
+      'api::course.course'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::trending-course.trending-course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::trending-course.trending-course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiUniversityUniversity extends Schema.CollectionType {
   collectionName: 'universities';
   info: {
@@ -893,6 +1054,11 @@ export interface ApiUniversityUniversity extends Schema.CollectionType {
     location: Attribute.String;
     address: Attribute.Text;
     remarks: Attribute.Text;
+    students: Attribute.Relation<
+      'api::university.university',
+      'manyToMany',
+      'api::student.student'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -929,8 +1095,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::application.application': ApiApplicationApplication;
       'api::course.course': ApiCourseCourse;
+      'api::message.message': ApiMessageMessage;
+      'api::professional.professional': ApiProfessionalProfessional;
       'api::student.student': ApiStudentStudent;
+      'api::trending-course.trending-course': ApiTrendingCourseTrendingCourse;
       'api::university.university': ApiUniversityUniversity;
     }
   }

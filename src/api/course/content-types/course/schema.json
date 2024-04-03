@@ -27,11 +27,40 @@
         "PHD"
       ]
     },
-    "specialisation": {
-      "type": "string"
-    },
     "description": {
       "type": "text"
+    },
+    "students": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::student.student",
+      "inversedBy": "courses"
+    },
+    "professionals": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::professional.professional",
+      "inversedBy": "courses"
+    },
+    "courseType": {
+      "type": "enumeration",
+      "enum": [
+        "BTech",
+        "Bsc",
+        "BA",
+        "MTech",
+        "MS",
+        "MBA",
+        "BPT",
+        "MPT"
+      ]
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

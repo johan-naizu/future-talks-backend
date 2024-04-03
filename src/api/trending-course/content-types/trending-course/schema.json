@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "trending_courses",
+  "info": {
+    "singularName": "trending-course",
+    "pluralName": "trending-courses",
+    "displayName": "Trending Course"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course"
+    }
+  }
+}

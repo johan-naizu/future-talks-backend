@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "students",
+  "collectionName": "professionals",
   "info": {
-    "singularName": "student",
-    "pluralName": "students",
-    "displayName": "student",
+    "singularName": "professional",
+    "pluralName": "professionals",
+    "displayName": "professional",
     "description": ""
   },
   "options": {
@@ -19,13 +19,10 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::course.course",
-      "mappedBy": "students"
+      "mappedBy": "professionals"
     },
-    "universities": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::university.university",
-      "mappedBy": "students"
+    "job": {
+      "type": "string"
     },
     "pfp": {
       "type": "media",
