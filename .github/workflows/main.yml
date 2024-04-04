@@ -39,4 +39,4 @@ jobs:
             git pull
             npm install
             npm run build
-            pm2 reload all
+            /home/jonaz/.nvm/versions/node/v20.12.1/bin/pm2 reload all
