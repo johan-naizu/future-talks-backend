@@ -20,12 +20,13 @@ export interface QualificationEducationalQualification
   info: {
     displayName: 'Educational Qualification';
     icon: 'book';
+    description: '';
   };
   attributes: {
     course: Attribute.String;
-    university: Attribute.String;
     marks: Attribute.String;
     message: Attribute.Text;
+    university: Attribute.String;
   };
 }
 

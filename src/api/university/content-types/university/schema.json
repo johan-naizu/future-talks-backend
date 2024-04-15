@@ -21,14 +21,30 @@
     "address": {
       "type": "text"
     },
-    "remarks": {
-      "type": "text"
-    },
     "students": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::student.student",
       "inversedBy": "universities"
+    },
+    "description": {
+      "type": "text"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "inversedBy": "universities"
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

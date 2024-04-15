@@ -4,7 +4,8 @@
   "info": {
     "singularName": "application",
     "pluralName": "applications",
-    "displayName": "application"
+    "displayName": "application",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -47,6 +48,11 @@
       "type": "component",
       "repeatable": false,
       "component": "qualification.educational-qualification"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::university.university"
     }
   }
 }

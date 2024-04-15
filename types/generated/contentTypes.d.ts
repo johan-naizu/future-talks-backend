@@ -794,6 +794,7 @@ export interface ApiApplicationApplication extends Schema.CollectionType {
     singularName: 'application';
     pluralName: 'applications';
     displayName: 'application';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -811,6 +812,11 @@ export interface ApiApplicationApplication extends Schema.CollectionType {
     phoneNumber: Attribute.String;
     address: Attribute.Component<'address.address'>;
     qualification: Attribute.Component<'qualification.educational-qualification'>;
+    university: Attribute.Relation<
+      'api::application.application',
+      'oneToOne',
+      'api::university.university'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -868,6 +874,12 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       ['BTech', 'Bsc', 'BA', 'MTech', 'MS', 'MBA', 'BPT', 'MPT']
     >;
     logo: Attribute.Media;
+    requirements: Attribute.Text;
+    universities: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::university.university'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -892,6 +904,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
     singularName: 'message';
     pluralName: 'messages';
     displayName: 'Message';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -900,6 +913,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
     name: Attribute.String;
     email: Attribute.Email;
     message: Attribute.Text;
+    phoneNumber: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1053,12 +1067,18 @@ export interface ApiUniversityUniversity extends Schema.CollectionType {
     name: Attribute.String;
     location: Attribute.String;
     address: Attribute.Text;
-    remarks: Attribute.Text;
     students: Attribute.Relation<
       'api::university.university',
       'manyToMany',
       'api::student.student'
     >;
+    description: Attribute.Text;
+    courses: Attribute.Relation<
+      'api::university.university',
+      'manyToMany',
+      'api::course.course'
+    >;
+    images: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
