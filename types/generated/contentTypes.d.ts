@@ -914,6 +914,16 @@ export interface ApiMessageMessage extends Schema.CollectionType {
     email: Attribute.Email;
     message: Attribute.Text;
     phoneNumber: Attribute.String;
+    course: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::course.course'
+    >;
+    university: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::university.university'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
